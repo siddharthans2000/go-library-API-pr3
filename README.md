@@ -7,6 +7,10 @@ The API has been developed based on a video from Akhil Sharma.
 
 In this repositary i have kept the source code of the API & dockerfile script to deploy this API in a docker container.
 
+
+
+Goals:
+
 - [x] Code Changes in Dockerfile to copy all the source file to the docker.
 - [x] Code Changes in Dockerfile to give the MySQL config.
 - [x] Code Changes in Dockerfile to configure the database in the MySQL and set up login credentials
