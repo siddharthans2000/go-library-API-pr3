@@ -1,0 +1,20 @@
+version: "3"
+services: 
+  implement_go:
+    image: golang:1.20.3-alpine3.17
+    ports: 8080:8080
+    networks: 
+     - basic
+  mysql_connect:
+    image: mysql:8.0.32-1.el8
+    env:
+      - MYSQL_ROOT_PASSWORD: password
+      - MYSQL_DATABASE: library
+    port:
+      - 3306:3306
+    networks:
+      - basic
+
+networks:
+  driver: bridge
+
