@@ -1,20 +1,31 @@
 version: "3"
 services: 
   implement_go:
-    image: golang:1.20.3-alpine3.17
-    ports: 8080:8080
-    networks: 
-     - basic
-  mysql_connect:
-    image: mysql:8.0.32-1.el8
-    env:
-      - MYSQL_ROOT_PASSWORD: password
-      - MYSQL_DATABASE: library
-    port:
-      - 3306:3306
+    image: basic:1.4
+    ports: 
+    - 8080:8080
+    env_file:
+     - .env
+    restart: always
+    depends_on:
+      mysqldb:
+        condition: service_healthy
     networks:
       - basic
+  mysqldb:
+    image: mysql:latest
+    env_file:
+     - .env
+    ports:
+      - 3305:3306
+    healthcheck:
+          test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost","-u","root","-p $MYSQL_ROOT_PASSWORD"]
+          timeout: 20s
+          retries: 10
+    networks:
+    - basic
 
 networks:
-  driver: bridge
-
+  basic:
+    driver: bridge
+    
