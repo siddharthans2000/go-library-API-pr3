@@ -1,15 +1,15 @@
 version: "3"
 services: 
   implement_go:
-    image: basic:1.4
+    image: basic:1.4 # change the name of the image here
     ports: 
     - 8080:8080
     env_file:
      - .env
-    restart: always
+    restart: always                 # Eventhough we have used the healthcheck for the mysqkl to startup the go-lang applicaiton was unable to connect with the mysql
     depends_on:
       mysqldb:
-        condition: service_healthy
+        condition: service_healthy   # this is to make sure application starts after the mysql is started and configured,
     networks:
       - basic
   mysqldb:
